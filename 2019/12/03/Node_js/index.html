@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://www.lifengyuan.club').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="初识Node.js 新建一个XXX.js 文件 console.log(“Hello world!”); 运行 node XXX.js  Cocos Creater目录文件夹 res 静态加载资源 resource 动态加载资源 scripts    js文件 可以用vscode来编写代码 scenes  场景文件夹  增删查改 增加子节点 new node() .addChild()  该节点移">
+<meta name="keywords" content="个人，博客">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Node_js">
+<meta property="og:url" content="https:&#x2F;&#x2F;www.lifengyuan.club&#x2F;2019&#x2F;12&#x2F;03&#x2F;Node_js&#x2F;index.html">
+<meta property="og:site_name" content="李烽源的博客">
+<meta property="og:description" content="初识Node.js 新建一个XXX.js 文件 console.log(“Hello world!”); 运行 node XXX.js  Cocos Creater目录文件夹 res 静态加载资源 resource 动态加载资源 scripts    js文件 可以用vscode来编写代码 scenes  场景文件夹  增删查改 增加子节点 new node() .addChild()  该节点移">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-09-10T15:33:49.000Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.lifengyuan.club/2019/12/03/Node_js/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Node_js | 李烽源的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">李烽源的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.lifengyuan.club/2019/12/03/Node_js/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="李烽源">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李烽源的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Node_js
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-12-03 13:16:53" itemprop="dateCreated datePublished" datetime="2019-12-03T13:16:53+08:00">2019-12-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-09-10 23:33:49" itemprop="dateModified" datetime="2019-09-10T23:33:49+08:00">2019-09-10</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="初识Node-js"><a href="#初识Node-js" class="headerlink" title="初识Node.js"></a>初识Node.js</h1><ol>
+<li>新建一个XXX.js 文件</li>
+<li>console.log(“Hello world!”);</li>
+<li>运行 node XXX.js</li>
+</ol>
+<h1 id="Cocos-Creater"><a href="#Cocos-Creater" class="headerlink" title="Cocos Creater"></a>Cocos Creater</h1><h2 id="目录文件夹"><a href="#目录文件夹" class="headerlink" title="目录文件夹"></a>目录文件夹</h2><ul>
+<li>res 静态加载资源</li>
+<li>resource 动态加载资源</li>
+<li>scripts    js文件 可以用vscode来编写代码</li>
+<li>scenes  场景文件夹</li>
+</ul>
+<h2 id="增删查改"><a href="#增删查改" class="headerlink" title="增删查改"></a>增删查改</h2><ul>
+<li><p>增加子节点 new node()</p>
+<p>.addChild()</p>
+</li>
+<li><p>该节点移除</p>
+<p>.removeFromPParent()</p>
+<ul>
+<li><p>移除所有子节点  </p>
+<p>.removeAllChildren()</p>
+</li>
+</ul>
+</li>
+<li><p>遍历子节点</p>
+</li>
+<li><p>得到位置 getPositioon()   相对位置</p>
+</li>
+<li><p>局部查找 得到一个指定的Node</p>
+<p>getChildByName()/getChildByTag()/getChildByindex()</p>
+<ul>
+<li>全局查找   cc.find()</li>
+</ul>
+</li>
+<li><p>改变ZOrder 的大小   默认为0  默认  在节点数的下头 放到上头</p>
+<p>.setLocalZOrder()</p>
+</li>
+</ul>
+<h2 id="组件的构造函数"><a href="#组件的构造函数" class="headerlink" title="组件的构造函数"></a>组件的构造函数</h2><ol>
+<li>onload</li>
+<li>start</li>
+<li>upgrade</li>
+</ol>
+<h2 id="事件响应"><a href="#事件响应" class="headerlink" title="事件响应"></a>事件响应</h2><ol>
+<li>触摸事件</li>
+</ol>
+<ul>
+<li>start    cc.Node.EventType.TOUCH_START</li>
+<li>move</li>
+<li>ended(物体内)</li>
+<li>cancel(物体外)<ol>
+<li>监听触摸事件 node.on(类型，callback，target(回调函数的this)，[useCapture]);</li>
+<li>关闭触摸事件 node.off</li>
+<li>移除所有注册事件 targetOff(target)</li>
+</ol>
+</li>
+</ul>
+<p>回调函数的格式 </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params">t</span>)</span>&#123;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//t 触摸事件的信息  以及 事件信息  cc.Touch 对象</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//跟随移动事件</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> delta=t.getDelta();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.node.x+=delta.x;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.node.y+=delta.y;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// target 的值为 回调函数的对象   亦可以显示绑定 eg</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params">t</span>)</span>&#123;&#125;.bind(<span class="keyword">this</span>);</span></pre></td></tr></table></figure>
+
+
+
+<ol start="2">
+<li><p>键盘事件</p>
+<p>设置函数：：cc.SystemEvent.on(type,callback,target)</p>
+<p>type: 按下  抬起</p>
+<p>​    cc.SystemEvent.EventType.KET_UP/KEY_DOWN</p>
+</li>
+</ol>
+<p>回调函数的格式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">	cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;&#125;,<span class="keyword">this</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//systemEvent 是一个实例  ，SystemEvent  是一个类</span></span></pre></td></tr></table></figure>
+
+
+
+<ol start="3">
+<li>自定义事件</li>
+</ol>
+<p>接收事件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.node.on(<span class="string">"Event"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    e.detail;<span class="comment">//接受传过来的数据</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;,<span class="keyword">this</span>);</span></pre></td></tr></table></figure>
+
+
+
+
+
+<p>发送事件</p>
+<ol>
+<li>自己内部传递事件</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.node.emit(<span class="string">"Evnent"</span>,[detail]);<span class="comment">//只有自己能够收到消息</span></span></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>冒泡派送  即向上传递</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.node.dispatchEvent(<span class="keyword">new</span> cc.Event.EventCostom(<span class="string">"Event"</span>,<span class="literal">true</span>/<span class="literal">false</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//true 向上传递false 不</span></span></pre></td></tr></table></figure>
+
+<h2 id="坐标系"><a href="#坐标系" class="headerlink" title="坐标系"></a>坐标系</h2><ul>
+<li>cc.Vec2</li>
+<li>var src,dst=cc.p(x,y)/ cc.v2(x,y)  创建一个二维向量</li>
+<li>var dir=cc.pSub(src,dst) 减法 得到一个向量</li>
+<li>cc.pAdd()加法</li>
+<li>cc.plength(dir)  求向量长度</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/12/02/hello-world/" rel="prev" title="Hello World">
+      <i class="fa fa-chevron-left"></i> Hello World
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/03/%E6%9D%82%E6%96%87/" rel="next" title="杂文">
+      杂文 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#初识Node-js"><span class="nav-number">1.</span> <span class="nav-text">初识Node.js</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cocos-Creater"><span class="nav-number">2.</span> <span class="nav-text">Cocos Creater</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#目录文件夹"><span class="nav-number">2.1.</span> <span class="nav-text">目录文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增删查改"><span class="nav-number">2.2.</span> <span class="nav-text">增删查改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件的构造函数"><span class="nav-number">2.3.</span> <span class="nav-text">组件的构造函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事件响应"><span class="nav-number">2.4.</span> <span class="nav-text">事件响应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#坐标系"><span class="nav-number">2.5.</span> <span class="nav-text">坐标系</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">李烽源</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李烽源</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
