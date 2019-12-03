@@ -260,11 +260,22 @@ a {
 }
 #container .mid-col {
   position: absolute;
-  right: 0;
+  right: 300px;
   min-height: 100%;
   background: rgba(255,255,255,0.8);
   left: 300px;
   width: auto;
+}
+#container .right-col {
+  background: #0099e5;
+  position: fixed;
+  opacity: 0.6;
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  -ms-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  right: 0%;
+  width: 300px;
 }
 @media screen and (max-width: 800px) {
   #container .left-col {
@@ -272,6 +283,9 @@ a {
   }
   #container .mid-col {
     left: 0;
+  }
+  #container .right-col {
+    display: none;
   }
   #container #header .header-nav {
     position: relative;

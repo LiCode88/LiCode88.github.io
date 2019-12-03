@@ -1,0 +1,8 @@
+.right-col {
+  width: 100%;
+  height: auto;
+}
+.right-col .right-tags {
+  background: #06c611;
+  border-radius: 50%;
+}
